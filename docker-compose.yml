@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  medicinjournal.api:
+    build:
+      context: .
+      dockerfile: MedicinJournal.API/Dockerfile

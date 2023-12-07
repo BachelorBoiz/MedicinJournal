@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.API", "MedicinJournal.API\MedicinJournal.API.csproj", "{5CE4E7D6-B67C-404D-9020-DC90C0F1FF3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Core", "MedicinJournal.Core\MedicinJournal.Core.csproj", "{D4D5185E-F3CE-40F6-8899-F3DA6623E502}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Domain", "MedicinJournal.Domain\MedicinJournal.Domain.csproj", "{34A59336-2CAB-4D6B-8C03-DFA45B97A82E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Infrastructure", "MedicinJournal.Infrastructure\MedicinJournal.Infrastructure.csproj", "{3DFC7DEB-5983-4618-AE33-11FCF84B9076}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Security", "MedicinJournal.Security\MedicinJournal.Security.csproj", "{7C5A358D-8694-4D4D-A9B1-9FA971577801}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5C07C00B-03E7-4964-9E5C-3B0F6DDC1066}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CE4E7D6-B67C-404D-9020-DC90C0F1FF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE4E7D6-B67C-404D-9020-DC90C0F1FF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE4E7D6-B67C-404D-9020-DC90C0F1FF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE4E7D6-B67C-404D-9020-DC90C0F1FF3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D5185E-F3CE-40F6-8899-F3DA6623E502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D5185E-F3CE-40F6-8899-F3DA6623E502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D5185E-F3CE-40F6-8899-F3DA6623E502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D5185E-F3CE-40F6-8899-F3DA6623E502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A59336-2CAB-4D6B-8C03-DFA45B97A82E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A59336-2CAB-4D6B-8C03-DFA45B97A82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A59336-2CAB-4D6B-8C03-DFA45B97A82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A59336-2CAB-4D6B-8C03-DFA45B97A82E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DFC7DEB-5983-4618-AE33-11FCF84B9076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DFC7DEB-5983-4618-AE33-11FCF84B9076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DFC7DEB-5983-4618-AE33-11FCF84B9076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DFC7DEB-5983-4618-AE33-11FCF84B9076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C07C00B-03E7-4964-9E5C-3B0F6DDC1066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C07C00B-03E7-4964-9E5C-3B0F6DDC1066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C07C00B-03E7-4964-9E5C-3B0F6DDC1066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C07C00B-03E7-4964-9E5C-3B0F6DDC1066}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C0BA6C2-846D-4004-A8A7-030B276E84FC}
+	EndGlobalSection
+EndGlobal

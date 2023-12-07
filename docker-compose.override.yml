@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  medicinjournal.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "9000:80"
+    volumes:
+      - ./MedicinJournal.API/Data:/data
