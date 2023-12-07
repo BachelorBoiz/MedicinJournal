@@ -1,7 +1,19 @@
-version: '3.4'
+version: "3.9"
 
 services:
-  medicinjournal.api:
+  medicin-journal-api:
     build:
       context: .
-      dockerfile: MedicinJournal.API/Dockerfile
+      dockerfile: ./MedicinJournal.API/Dockerfile
+    ports:
+      - 9000:80
+    volumes:
+      - ./MedicinJournal.API/Data:/data
+  medicin-journal-ui:
+    build:
+      context: ./MedicinJournal.UI
+      dockerfile: ./Dockerfile
+    ports:
+      - 9001:80
+
+  
