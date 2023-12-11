@@ -7,11 +7,15 @@ using MedicinJournal.Security.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using MedicinJournal.API.Jwt;
 using MedicinJournal.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using PasswordManager.Infrastructure;
+using MedicinJournal.Security;
+using MedicinJournal.Security.Repositories;
+using Microsoft.AspNetCore.Http.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,16 +73,21 @@ builder.Services.AddAuthentication(authenticationOptions =>
     });
 
 builder.Services.AddScoped<IJournalService, JournalService>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IUserLoginService, UserLoginService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 builder.Services.AddDbContext<MedicinJournalDbContext>(options =>
     options.UseSqlite("Data Source=/data/journal.db"));
 
+builder.Services.AddDbContext<UserLoginDbContext>(options =>
+    options.UseSqlite("Data Source=/data/auth.db"));
+
 builder.Services.AddScoped<IJournalRepository, JournalRepository>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
+
 
 builder.Services.AddCors(options => options
     .AddPolicy("dev-policy", policyBuilder =>
@@ -89,10 +98,14 @@ var app = builder.Build();
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var ctx = scope.ServiceProvider.GetRequiredService<MedicinJournalDbContext>();
+    var authCtx = scope.ServiceProvider.GetRequiredService<UserLoginDbContext>();
     var passwordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
     await ctx.Database.EnsureDeletedAsync();
     await ctx.Database.EnsureCreatedAsync();
+
+    await authCtx.Database.EnsureDeletedAsync();
+    await authCtx.Database.EnsureCreatedAsync();
 
     //await ctx.SaveChangesAsync();
 }

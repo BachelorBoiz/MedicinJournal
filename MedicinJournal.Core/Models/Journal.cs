@@ -12,7 +12,7 @@ namespace MedicinJournal.Core.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-        public Patient Patient { get; set; }
-        public Employee Employee { get; set; }
+        public User Employee { get; set; }
+        public User Patient { get; set; }
     }
 }
