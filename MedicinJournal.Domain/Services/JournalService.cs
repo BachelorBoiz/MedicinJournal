@@ -5,29 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using MedicinJournal.Core.IServices;
 using MedicinJournal.Core.Models;
+using MedicinJournal.Domain.IRepositories;
 
 namespace MedicinJournal.Domain.Services
 {
     public class JournalService : IJournalService
     {
-        public Task<Journal> GetJournalById(int id)
+        private readonly IJournalRepository _journalRepository;
+
+        public JournalService(IJournalRepository journalRepository)
         {
-            throw new NotImplementedException();
+            _journalRepository = journalRepository;
         }
 
-        public Task<Journal> CreateJournal(Journal journal)
+        public async Task<Journal> GetJournalById(int id)
         {
-            throw new NotImplementedException();
+            return await _journalRepository.GetJournalById(id);
         }
 
-        public Task<Journal> UpdateJournal(Journal journal)
+        public async Task<IEnumerable<Journal>> GetJournalsForUser(int userId)
         {
-            throw new NotImplementedException();
+            return await _journalRepository.GetJournalsForUser(userId);
         }
 
-        public Task DeleteJournal(int id)
+        public async Task<Journal> CreateJournal(Journal journal)
         {
-            throw new NotImplementedException();
+            return await _journalRepository.CreateJournal(journal);
+        }
+
+        public async Task<Journal> UpdateJournal(Journal journal)
+        {
+            return await _journalRepository.UpdateJournal(journal);
+        }
+
+        public async Task DeleteJournal(int id)
+        {
+            await _journalRepository.DeleteJournal(id);
         }
     }
 }

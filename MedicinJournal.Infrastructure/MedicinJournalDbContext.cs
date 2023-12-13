@@ -5,8 +5,6 @@ namespace PasswordManager.Infrastructure;
 
 public class MedicinJournalDbContext : DbContext
 {
-    public DbSet<PatientEntity> Patients { get; set; }
-    public DbSet<EmployeeEntity> Employees{ get; set; }
     public DbSet<JournalEntity> Journals { get; set; }
     public DbSet<UserEntity> Users { get; set; }
 
@@ -14,8 +12,6 @@ public class MedicinJournalDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<PatientEntity>().HasKey(x => x.Id);
-        modelBuilder.Entity<EmployeeEntity>().HasKey(x => x.Id);
         modelBuilder.Entity<JournalEntity>().HasKey(x => x.Id);
         modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
 
@@ -28,6 +24,5 @@ public class MedicinJournalDbContext : DbContext
             .HasOne(journal => journal.Employee)
             .WithMany() // No need to specify the navigation property on the "many" side
             .HasForeignKey(journal => journal.EmployeeId);       // Foreign key property in JournalEntity
-
-    }
+        }
 }

@@ -10,11 +10,12 @@ namespace MedicinJournal.Infrastructure.Entities
     public class UserEntity
     {
         public int Id { get; set; }
+        public UserRole Role { get; set; }
         public string Name { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string Gender { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
-        public ICollection<JournalEntity> Journals { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string? Gender { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
+        public ICollection<JournalEntity>? Journals { get; set; }
     }
 }

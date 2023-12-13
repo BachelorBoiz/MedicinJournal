@@ -7,6 +7,7 @@ using MedicinJournal.Security.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using MedicinJournal.API;
 using MedicinJournal.API.Jwt;
 using MedicinJournal.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -72,6 +73,8 @@ builder.Services.AddAuthentication(authenticationOptions =>
         };
     });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddScoped<IJournalService, JournalService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
@@ -102,12 +105,14 @@ await using (var scope = app.Services.CreateAsyncScope())
     var passwordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
     await ctx.Database.EnsureDeletedAsync();
-    await ctx.Database.EnsureCreatedAsync();
-
     await authCtx.Database.EnsureDeletedAsync();
+
+    await ctx.Database.EnsureCreatedAsync();
     await authCtx.Database.EnsureCreatedAsync();
 
-    //await ctx.SaveChangesAsync();
+    var testDataGenerator = new TestDataGenerator(ctx, authCtx, passwordHash);
+
+    testDataGenerator.Generate();
 }
 
 // Configure the HTTP request pipeline.

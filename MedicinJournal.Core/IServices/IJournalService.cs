@@ -10,6 +10,7 @@ namespace MedicinJournal.Core.IServices
     public interface IJournalService
     {
         Task<Journal> GetJournalById(int id);
+        Task<IEnumerable<Journal>> GetJournalsForUser(int userId);
         Task<Journal> CreateJournal (Journal journal);
         Task<Journal> UpdateJournal (Journal journal);
         Task DeleteJournal (int id);
