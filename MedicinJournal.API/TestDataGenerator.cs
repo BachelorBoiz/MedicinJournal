@@ -11,7 +11,7 @@ namespace MedicinJournal.API
     public class TestDataGenerator
     {
         private readonly MedicinJournalDbContext _medicinJournalDbContext;
-        private readonly UserLoginDbContext _userLoginDbContext;
+        private readonly SecurityDbContext _userLoginDbContext;
         private readonly IPasswordHasher _passwordHasher;
 
         //private readonly IUserLoginService _userLoginService;
@@ -25,7 +25,7 @@ namespace MedicinJournal.API
         //    _userLoginService = userLoginService;
         //}
 
-        public TestDataGenerator(MedicinJournalDbContext medicinJournalDbContext, UserLoginDbContext userLoginDbContext, IPasswordHasher passwordHasher)
+        public TestDataGenerator(MedicinJournalDbContext medicinJournalDbContext, SecurityDbContext userLoginDbContext, IPasswordHasher passwordHasher)
         {
             _medicinJournalDbContext = medicinJournalDbContext;
             _userLoginDbContext = userLoginDbContext;
@@ -38,7 +38,6 @@ namespace MedicinJournal.API
             {
                 Name = "Dr Smith",
                 Gender = "Male",
-                Role = UserRole.Doctor,
                 BirthDate = DateTime.Now
             });
 
@@ -46,6 +45,7 @@ namespace MedicinJournal.API
             {
                 UserId = 1,
                 UserName = "Doctor",
+                Role = UserRole.Doctor,
                 HashedPassword = _passwordHasher.Hash("123456")
             });
 
@@ -53,7 +53,6 @@ namespace MedicinJournal.API
             {
                 Name = "Patient Zero",
                 Gender = "Female",
-                Role = UserRole.Patient,
                 BirthDate = DateTime.Now
             });
 
@@ -61,6 +60,7 @@ namespace MedicinJournal.API
             {
                 UserId = 2,
                 UserName = "Patient",
+                Role = UserRole.Patient,
                 HashedPassword = _passwordHasher.Hash("123456")
             });
 
@@ -78,38 +78,5 @@ namespace MedicinJournal.API
             _medicinJournalDbContext.SaveChanges();
             _userLoginDbContext.SaveChanges();
         }
-
-        //public async Task Generate()
-        //{
-        //    var doctor = await _userService.CreateUser(new User
-        //    {
-        //        Name = "Test",
-        //        Gender = "Male",
-        //        Role = UserRole.Doctor,
-        //        BirthDate = DateTime.Now
-        //    });
-
-        //    await _userLoginService.CreateUserLogin(doctor.Id, "Doctor", "123456");
-
-        //    var patient = await _userService.CreateUser(new User
-        //    {
-        //        Name = "Patient",
-        //        Gender = "Female",
-        //        Role = UserRole.Patient,
-        //        BirthDate = DateTime.Now
-        //    });
-
-        //    await _userLoginService.CreateUserLogin(patient.Id, "Patient", "123456");
-
-        //    await _journalService.CreateJournal(new Journal
-        //    {
-        //        Created = DateTime.Today,
-        //        Description = "test",
-        //        Employee = doctor,
-        //        Patient = patient,
-        //        Title = "Test journal"
-
-        //    });
-        //}
     }
 }

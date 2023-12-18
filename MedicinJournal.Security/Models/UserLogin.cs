@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MedicinJournal.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace MedicinJournal.Security.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public UserRole Role { get; set; }
         public string UserName { get; set; }
         public string HashedPassword { get; set; }
     }

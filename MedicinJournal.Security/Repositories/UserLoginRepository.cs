@@ -11,9 +11,9 @@ namespace MedicinJournal.Security.Repositories
 {
     public class UserLoginRepository : IUserLoginRepository
     {
-        private readonly UserLoginDbContext _context;
+        private readonly SecurityDbContext _context;
 
-        public UserLoginRepository(UserLoginDbContext context)
+        public UserLoginRepository(SecurityDbContext context)
         {
             _context = context;
         }

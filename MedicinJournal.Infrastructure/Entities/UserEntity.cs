@@ -1,16 +1,8 @@
-﻿using MedicinJournal.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MedicinJournal.Infrastructure.Entities
+﻿namespace MedicinJournal.Infrastructure.Entities
 {
     public class UserEntity
     {
         public int Id { get; set; }
-        public UserRole Role { get; set; }
         public string Name { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Gender { get; set; }

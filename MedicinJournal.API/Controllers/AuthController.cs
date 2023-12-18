@@ -10,7 +10,7 @@ using MedicinJournal.Security.Interfaces;
 
 namespace MedicinJournal.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace MedicinJournal.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/CreateUser")]
+        [HttpPost("CreateUser")]
         public async Task<ActionResult<JwtToken>> CreateUser([FromBody] CreateUserDto dto)
         {
             var user = await _userLoginService.GetUserLogin(dto.UserName);
@@ -50,7 +50,7 @@ namespace MedicinJournal.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public async Task<ActionResult<JwtToken>> Login([FromBody] LoginDto dto)
         {
             try

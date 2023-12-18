@@ -17,6 +17,7 @@ using PasswordManager.Infrastructure;
 using MedicinJournal.Security;
 using MedicinJournal.Security.Repositories;
 using Microsoft.AspNetCore.Http.Extensions;
+using MedicinJournal.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,12 +85,14 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddDbContext<MedicinJournalDbContext>(options =>
     options.UseSqlite("Data Source=/data/journal.db"));
 
-builder.Services.AddDbContext<UserLoginDbContext>(options =>
+builder.Services.AddDbContext<SecurityDbContext>(options =>
     options.UseSqlite("Data Source=/data/auth.db"));
 
 builder.Services.AddScoped<IJournalRepository, JournalRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 builder.Services.AddCors(options => options
@@ -101,7 +104,7 @@ var app = builder.Build();
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var ctx = scope.ServiceProvider.GetRequiredService<MedicinJournalDbContext>();
-    var authCtx = scope.ServiceProvider.GetRequiredService<UserLoginDbContext>();
+    var authCtx = scope.ServiceProvider.GetRequiredService<SecurityDbContext>();
     var passwordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
     await ctx.Database.EnsureDeletedAsync();
@@ -127,6 +130,12 @@ await using (var scope = app.Services.CreateAsyncScope())
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.Use(next => context => {
+    context.Request.EnableBuffering();
+    return next(context);
+});
+app.UseMiddleware<AuditLogMiddleware>();
 
 app.UseCors("dev-policy");
 

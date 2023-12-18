@@ -36,7 +36,8 @@ namespace MedicinJournal.API.Jwt
                 new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName)
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
                 },
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);

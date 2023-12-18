@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedicinJournal.Security.Models;
+﻿using MedicinJournal.Security.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicinJournal.Security
 {
-    public class UserLoginDbContext : DbContext
+    public class SecurityDbContext : DbContext
     {
         public DbSet<UserLogin> UserLogins { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
-        public UserLoginDbContext(DbContextOptions<UserLoginDbContext> options) : base(options) { }
+        public SecurityDbContext(DbContextOptions<SecurityDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserLogin>().HasKey(x => x.Id);
+            modelBuilder.Entity<AuditLog>().HasKey(x => x.Id);
         }
     }
 }
