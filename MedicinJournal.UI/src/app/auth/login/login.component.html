@@ -2,12 +2,12 @@
     <h2>Login</h2>
     <form>
       <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
+      <input #username type="text" id="username" name="username" required>
   
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
+      <input #password type="password" id="password" name="password" required>
   
-      <button type="submit">Login</button>
+      <button (click)="login(password.value, username.value)" type="button">Login</button>
     </form>
     <p>Don't have an account? <a routerLink="/create-user">Create User</a></p>
   </div>
