@@ -74,6 +74,10 @@ builder.Services.AddAuthentication(authenticationOptions =>
         };
     });
 
+builder.Services.AddCors(options => options
+    .AddPolicy("dev-policy", policyBuilder =>
+        policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IJournalService, JournalService>();
@@ -94,12 +98,9 @@ builder.Services.AddScoped<IUserLoginRepository, UserLoginRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
-builder.Services.AddCors(options => options
-    .AddPolicy("dev-policy", policyBuilder =>
-        policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
-
 var app = builder.Build();
+
+app.UseCors("dev-policy");
 
 await using (var scope = app.Services.CreateAsyncScope())
 {
@@ -136,8 +137,6 @@ app.Use(next => context => {
     return next(context);
 });
 app.UseMiddleware<AuditLogMiddleware>();
-
-app.UseCors("dev-policy");
 
 app.MapControllers();
 

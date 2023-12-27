@@ -34,7 +34,11 @@ namespace MedicinJournal.Infrastructure.Repositories
 
         public async Task<IEnumerable<Journal>> GetJournalsForUser(int userId)
         {
-            throw new NotImplementedException();
+            var journalEntities = await _dbContext.Journals.Where(e => e.PatientId == userId).ToListAsync();
+
+            var journals = _mapper.Map<IEnumerable<Journal>>(journalEntities);
+
+            return journals;
         }
 
         public async Task<Journal> CreateJournal(Journal journal)

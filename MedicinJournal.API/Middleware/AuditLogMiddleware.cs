@@ -29,6 +29,8 @@ namespace MedicinJournal.API.Middleware
             {
                 var userName = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
 
+                Console.WriteLine(userName);
+
                 if (request.Path.StartsWithSegments("/api/Auth/login"))
                     userName = "Login";
 
@@ -57,7 +59,6 @@ namespace MedicinJournal.API.Middleware
 
             switch (request.Method)
             {
-                case "GET":
                 case "POST":
                 case "PUT":
                     changedValue = await ReadRequestBody(request, Encoding.UTF8).ConfigureAwait(false);

@@ -7,7 +7,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { AuthInterceptor } from './auth/shared/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,17 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     CreateUserComponent,
     DashboardComponent,
-    PatientDetailComponent
+    PatientDetailComponent,
+    PatientDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

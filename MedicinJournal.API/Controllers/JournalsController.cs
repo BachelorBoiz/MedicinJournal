@@ -1,4 +1,6 @@
-﻿using MedicinJournal.Core.IServices;
+﻿using System.Security.Claims;
+using MedicinJournal.Core.IServices;
+using MedicinJournal.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +24,25 @@ namespace MedicinJournal.API.Controllers
             var journal = await _journalService.GetJournalById(id);
 
             return Ok(journal);
+        }
+
+        [Authorize]
+        [HttpGet("userJournals")]
+        public async Task<ActionResult<IEnumerable<Journal>>> GetJournalsForUser()
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                var journals = await _journalService.GetJournalsForUser(userId);
+
+                return Ok(journals);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

@@ -4,12 +4,14 @@ import { LoginComponent } from './auth/login/login.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'create-user', component: CreateUserComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'patient-dashboard', component: PatientDashboardComponent},
   {path: 'patient/:name', component: PatientDetailComponent}
 ];
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using MedicinJournal.Security.Interfaces;
@@ -29,6 +30,13 @@ namespace MedicinJournal.Security.Repositories
             await _context.SaveChangesAsync();
 
             return userLogin;
+        }
+
+        public async Task<UserRole> GetUserRole(int userId)
+        {
+            var user = await _context.UserLogins.FirstOrDefaultAsync(e => e.UserId == userId);
+
+            return user.Role;
         }
     }
 }

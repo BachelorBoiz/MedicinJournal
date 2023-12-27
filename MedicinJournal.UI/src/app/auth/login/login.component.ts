@@ -26,7 +26,13 @@ export class LoginComponent {
       .subscribe(token => {
         if(token && token.jwt){
           console.log('Token: ', token);
-          this.router.navigate(['/dashboard'])
+          this._auth.getUserRole().subscribe(role => {
+            if(role.name === "Doctor") {
+              this.router.navigate(['/dashboard'])
+            } else if(role.name === "Patient") {
+              this.router.navigate(['/patient-dashboard'])
+            }
+          })          
         }
       });
   }

@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
+using System.Security.Claims;
 using MedicinJournal.API.Jwt;
 using MedicinJournal.Core.IServices;
 using MedicinJournal.Core.Models;
 using MedicinJournal.Security.Interfaces;
+using MedicinJournal.Security.Models;
 
 namespace MedicinJournal.API.Controllers
 {
@@ -65,6 +67,29 @@ namespace MedicinJournal.API.Controllers
             catch (AuthenticationException ae)
             {
                 return Unauthorized(ae.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("userRole")]
+        public async Task<ActionResult<GetUserRole>> GetUserRole()
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                var role =  await _userLoginService.GetUserRole(userId);
+
+                var getRole = new GetUserRole
+                {
+                    Name = role.ToString()
+                };
+
+                return Ok(getRole);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

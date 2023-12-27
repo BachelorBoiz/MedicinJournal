@@ -11,5 +11,6 @@ namespace MedicinJournal.Security.Interfaces
     {
         Task<UserLogin> CreateUserLogin(int userId, string userName, string plainTextPassword);
         Task<UserLogin?> GetUserLogin(string userName);
+        Task<UserRole> GetUserRole(int userId);
     }
 }
