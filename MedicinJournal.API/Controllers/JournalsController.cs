@@ -26,7 +26,7 @@ namespace MedicinJournal.API.Controllers
             return Ok(journal);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Doctor, Patient")]
         [HttpGet("userJournals")]
         public async Task<ActionResult<IEnumerable<Journal>>> GetJournalsForUser()
         {

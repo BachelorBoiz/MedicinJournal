@@ -29,10 +29,8 @@ namespace MedicinJournal.API.Middleware
             {
                 var userName = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
 
-                Console.WriteLine(userName);
-
                 if (request.Path.StartsWithSegments("/api/Auth/login"))
-                    userName = "Login";
+                    return;
 
                 request.RouteValues.TryGetValue(ControllerKey, out var controllerValue);
                 var controllerName = (string)(controllerValue ?? string.Empty);
