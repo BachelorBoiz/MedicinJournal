@@ -85,6 +85,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IUserLoginService, UserLoginService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ISymmetricKeyService, SymmetricKeyService>();
 
 builder.Services.AddDbContext<MedicinJournalDbContext>(options =>
     options.UseSqlite("Data Source=/data/journal.db"));

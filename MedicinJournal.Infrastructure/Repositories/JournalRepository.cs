@@ -58,7 +58,15 @@ namespace MedicinJournal.Infrastructure.Repositories
 
         public async Task DeleteJournal(int id)
         {
-            throw new NotImplementedException();
+            var journalEntity = await _dbContext.Journals.FindAsync(id);
+
+            if(journalEntity == null)
+            {
+                throw new InvalidOperationException($"Journal entry with id {id} not found");
+            }
+
+            _dbContext.Journals.Remove(journalEntity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
