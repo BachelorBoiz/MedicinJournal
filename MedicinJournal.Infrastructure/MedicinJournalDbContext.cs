@@ -22,6 +22,11 @@ public class MedicinJournalDbContext : DbContext
             .WithMany(doctor => doctor.Patients)
             .HasForeignKey(user => user.DoctorId);
 
+        modelBuilder.Entity<EmployeeEntity>()
+            .HasMany(employee => employee.Patients)
+            .WithOne(patient => patient.Doctor)
+            .HasForeignKey(patient => patient.DoctorId);
+
         modelBuilder.Entity<JournalEntity>()
             .HasOne(journal => journal.Patient) // Each JournalEntity has one Patient (UserEntity)
             .WithMany(user => user.Journals)    // Each UserEntity has many Journals

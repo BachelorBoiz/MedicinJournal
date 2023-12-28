@@ -76,9 +76,9 @@ namespace MedicinJournal.API.Controllers
         {
             try
             {
-                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var userName = User.FindFirstValue(ClaimTypes.Name);
 
-                var role =  await _userLoginService.GetUserRole(userId);
+                var role =  await _userLoginService.GetUserRole(userName);
 
                 var getRole = new GetUserRole
                 {

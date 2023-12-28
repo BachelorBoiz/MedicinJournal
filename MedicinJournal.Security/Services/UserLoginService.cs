@@ -37,9 +37,9 @@ namespace MedicinJournal.Security.Services
             return await _repository.GetByUserName(userName);
         }
 
-        public async Task<UserRole> GetUserRole(int userId)
+        public async Task<UserRole> GetUserRole(string userName)
         {
-            return await _repository.GetUserRole(userId);
+            return await _repository.GetUserRole(userName);
         }
     }
 }

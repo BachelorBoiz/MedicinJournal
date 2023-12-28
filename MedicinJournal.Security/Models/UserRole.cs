@@ -9,6 +9,8 @@ namespace MedicinJournal.Security.Models
     public enum UserRole
     {
         Doctor,
-        Patient
+        Patient,
+        Nurse,
+        Receptionist
     }
 }

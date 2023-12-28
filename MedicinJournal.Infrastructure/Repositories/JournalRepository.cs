@@ -62,7 +62,7 @@ namespace MedicinJournal.Infrastructure.Repositories
 
             if(journalEntity == null)
             {
-                throw new InvalidOperationException($"Journal entry with id {id} not found");
+                throw new InvalidOperationException($"Journal entry with id: {id} not found");
             }
 
             _dbContext.Journals.Remove(journalEntity);

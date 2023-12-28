@@ -32,9 +32,9 @@ namespace MedicinJournal.Security.Repositories
             return userLogin;
         }
 
-        public async Task<UserRole> GetUserRole(int userId)
+        public async Task<UserRole> GetUserRole(string userName)
         {
-            var user = await _context.UserLogins.FirstOrDefaultAsync(e => e.UserId == userId);
+            var user = await _context.UserLogins.FirstOrDefaultAsync(e => e.UserName == userName);
 
             return user.Role;
         }

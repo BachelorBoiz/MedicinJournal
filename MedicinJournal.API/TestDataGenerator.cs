@@ -14,17 +14,6 @@ namespace MedicinJournal.API
         private readonly SecurityDbContext _userLoginDbContext;
         private readonly IPasswordHasher _passwordHasher;
 
-        //private readonly IUserLoginService _userLoginService;
-        //private readonly IJournalService _journalService;
-        //private readonly IUserService _userService;
-
-        //public TestDataGenerator(IUserLoginService userLoginService, IUserService userService, IJournalService journalService)
-        //{
-        //    _userService = userService;
-        //    _journalService = journalService;
-        //    _userLoginService = userLoginService;
-        //}
-
         public TestDataGenerator(MedicinJournalDbContext medicinJournalDbContext, SecurityDbContext userLoginDbContext, IPasswordHasher passwordHasher)
         {
             _medicinJournalDbContext = medicinJournalDbContext;
