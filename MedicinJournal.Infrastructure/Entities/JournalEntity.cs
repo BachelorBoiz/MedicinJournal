@@ -14,7 +14,7 @@ namespace MedicinJournal.Infrastructure.Entities
         public DateTime Created { get; set; }
         public UserEntity Patient { get; set; }
         public int PatientId { get; set; }
-        public UserEntity Employee { get; set; }
-        public int EmployeeId { get; set; }
+        public EmployeeEntity Doctor { get; set; }
+        public int DoctorId { get; set; }
     }
 }

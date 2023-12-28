@@ -15,6 +15,7 @@ namespace MedicinJournal.Infrastructure
         {
             CreateMap<User, UserEntity>().ReverseMap();
             CreateMap<Journal, JournalEntity>().ReverseMap();
+            CreateMap<Employee, EmployeeEntity>().ReverseMap();
         }
     }
 }

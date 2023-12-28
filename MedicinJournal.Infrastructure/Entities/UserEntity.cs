@@ -8,6 +8,8 @@
         public string? Gender { get; set; }
         public double? Height { get; set; }
         public double? Weight { get; set; }
+        public EmployeeEntity Doctor { get; set; }
+        public int DoctorId { get; set; }
         public ICollection<JournalEntity>? Journals { get; set; }
     }
 }

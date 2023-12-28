@@ -34,16 +34,17 @@ namespace MedicinJournal.API
 
         public void Generate()
         {
-             _medicinJournalDbContext.Users.Add(new UserEntity
+             _medicinJournalDbContext.Employees.Add(new EmployeeEntity
             {
                 Name = "Dr Smith",
-                Gender = "Male",
-                BirthDate = DateTime.Now
+                Role = EmployeeRole.Doctor
             });
+
+             _medicinJournalDbContext.SaveChanges();
 
             _userLoginDbContext.UserLogins.Add(new UserLogin
             {
-                UserId = 1,
+                EmployeeId = 1,
                 UserName = "Doctor",
                 Role = UserRole.Doctor,
                 HashedPassword = _passwordHasher.Hash("123456")
@@ -52,13 +53,14 @@ namespace MedicinJournal.API
             _medicinJournalDbContext.Users.Add(new UserEntity
             {
                 Name = "Patient Zero",
+                DoctorId = 1,
                 Gender = "Female",
                 BirthDate = DateTime.Now
             });
 
             _userLoginDbContext.UserLogins.Add(new UserLogin
             {
-                UserId = 2,
+                UserId = 1,
                 UserName = "Patient",
                 Role = UserRole.Patient,
                 HashedPassword = _passwordHasher.Hash("123456")
@@ -71,8 +73,8 @@ namespace MedicinJournal.API
                 Created = DateTime.Now,
                 Description = "Test",
                 Title = "Test",
-                EmployeeId = 1,
-                PatientId = 2
+                DoctorId  = 1,
+                PatientId = 1
             });
 
             _medicinJournalDbContext.SaveChanges();

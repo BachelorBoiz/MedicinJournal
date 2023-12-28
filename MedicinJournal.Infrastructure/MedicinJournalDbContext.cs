@@ -7,6 +7,7 @@ public class MedicinJournalDbContext : DbContext
 {
     public DbSet<JournalEntity> Journals { get; set; }
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<EmployeeEntity> Employees { get; set; }
 
     public MedicinJournalDbContext(DbContextOptions<MedicinJournalDbContext> options) : base(options) { }
 
@@ -14,6 +15,12 @@ public class MedicinJournalDbContext : DbContext
     {
         modelBuilder.Entity<JournalEntity>().HasKey(x => x.Id);
         modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
+        modelBuilder.Entity<EmployeeEntity>().HasKey(x => x.Id);
+
+        modelBuilder.Entity<UserEntity>()
+            .HasOne(user => user.Doctor)
+            .WithMany(doctor => doctor.Patients)
+            .HasForeignKey(user => user.DoctorId);
 
         modelBuilder.Entity<JournalEntity>()
             .HasOne(journal => journal.Patient) // Each JournalEntity has one Patient (UserEntity)
@@ -21,8 +28,8 @@ public class MedicinJournalDbContext : DbContext
             .HasForeignKey(journal => journal.PatientId);        // Foreign key property in JournalEntity
 
         modelBuilder.Entity<JournalEntity>()
-            .HasOne(journal => journal.Employee)
+            .HasOne(journal => journal.Doctor)
             .WithMany() // No need to specify the navigation property on the "many" side
-            .HasForeignKey(journal => journal.EmployeeId);       // Foreign key property in JournalEntity
+            .HasForeignKey(journal => journal.DoctorId);       // Foreign key property in JournalEntity
         }
 }

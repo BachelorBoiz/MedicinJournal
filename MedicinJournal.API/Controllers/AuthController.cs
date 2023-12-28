@@ -27,7 +27,7 @@ namespace MedicinJournal.API.Controllers
             _userService = userService;
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Doctor")]
         [HttpPost("CreateUser")]
         public async Task<ActionResult<JwtToken>> CreateUser([FromBody] CreateUserDto dto)
         {

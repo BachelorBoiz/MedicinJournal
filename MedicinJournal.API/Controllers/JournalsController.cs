@@ -55,7 +55,8 @@ namespace MedicinJournal.API.Controllers
                 throw;
             }
         }
-        [Authorize]
+
+        [Authorize(Roles = "Doctor")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteJournalById([FromRoute] int id)
         {
@@ -92,6 +93,5 @@ namespace MedicinJournal.API.Controllers
             Console.WriteLine("Symmetric Key Test---------------------------------");
             return Ok(deryptedText);
         }
-
     }
 }
