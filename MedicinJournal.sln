@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Security", "MedicinJournal.Security\MedicinJournal.Security.csproj", "{7C5A358D-8694-4D4D-A9B1-9FA971577801}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Test", "MedicinJournal.Test\MedicinJournal.Test.csproj", "{267C3983-11B9-4D8C-859E-9D4FA6B277B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5A358D-8694-4D4D-A9B1-9FA971577801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267C3983-11B9-4D8C-859E-9D4FA6B277B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267C3983-11B9-4D8C-859E-9D4FA6B277B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267C3983-11B9-4D8C-859E-9D4FA6B277B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267C3983-11B9-4D8C-859E-9D4FA6B277B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
