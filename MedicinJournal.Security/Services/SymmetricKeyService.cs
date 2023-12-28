@@ -16,6 +16,7 @@ namespace MedicinJournal.Security.Services
         {
             using (var aes = new AesCryptoServiceProvider())
             {
+                aes.KeySize = 256;
                 aes.GenerateKey();
                 return aes.Key;
             }
