@@ -33,7 +33,7 @@ namespace MedicinJournal.API.Controllers
         {
             var user = await _userLoginService.GetUserLogin(dto.UserName);
 
-            if (user is not null) return BadRequest("User with given email already exists");
+            if (user is not null) return BadRequest("User with given username already exists");
 
             var newUser = await _userService.CreateUser(new User
             {
