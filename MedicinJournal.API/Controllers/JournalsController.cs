@@ -19,10 +19,10 @@ namespace MedicinJournal.API.Controllers
     [ApiController]
     public class JournalsController : ControllerBase
     {
-        private readonly ISymmetricKeyService _symmetricKeyService;
+        private readonly ISymmetricCryptographyService _symmetricKeyService;
         private readonly IJournalService _journalService;
 
-        public JournalsController(IJournalService journalService, ISymmetricKeyService symmetricKeyService)
+        public JournalsController(IJournalService journalService, ISymmetricCryptographyService symmetricKeyService)
         {
             _journalService = journalService;
             _symmetricKeyService = symmetricKeyService;

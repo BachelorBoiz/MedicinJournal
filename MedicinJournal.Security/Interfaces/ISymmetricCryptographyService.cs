@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MedicinJournal.Security.Interfaces
 {
-    public interface ISymmetricKeyService
+    public interface ISymmetricCryptographyService
     {
         public byte[] GenerateKey();
 

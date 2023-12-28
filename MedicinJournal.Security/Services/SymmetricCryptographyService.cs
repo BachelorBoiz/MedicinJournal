@@ -9,7 +9,7 @@ using MedicinJournal.Security.Interfaces;
 
 namespace MedicinJournal.Security.Services
 {
-    public class SymmetricKeyService : ISymmetricKeyService
+    public class SymmetricCryptographyService : ISymmetricCryptographyService
     {
         private const string text = "I like turtles";
         public byte[] GenerateKey()
