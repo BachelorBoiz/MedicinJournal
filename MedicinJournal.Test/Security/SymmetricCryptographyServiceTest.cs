@@ -119,7 +119,7 @@ namespace MedicinJournal.Test.Security
         }
 
         [Fact]
-        public void Test_SymmetricCryptography_Encrypt_NotEqual()
+        public void Test_SymmetricCryptography_Encrypt_unique()
         {
             ISymmetricCryptographyService _service = new SymmetricCryptographyService();
             int numberOfEncryptionsToGenerate = 20;
