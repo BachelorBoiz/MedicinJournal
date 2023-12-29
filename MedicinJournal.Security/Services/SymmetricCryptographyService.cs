@@ -11,14 +11,14 @@ namespace MedicinJournal.Security.Services
 {
     public class SymmetricCryptographyService : ISymmetricCryptographyService
     {
-        private const string text = "I like turtles";
         public byte[] GenerateKey()
         {
             using (var aes = new AesCryptoServiceProvider())
             {
                 aes.KeySize = 256;
                 aes.GenerateKey();
-                return aes.Key;
+                byte[] key = aes.Key;
+                return key;
             }
         }
 
@@ -46,7 +46,6 @@ namespace MedicinJournal.Security.Services
                     byte[] result = new byte[iv.Length + cipherBytes.Length];
                     Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
                     Buffer.BlockCopy(cipherBytes, 0,result, iv.Length, cipherBytes.Length);
-
 
                     return result;
                 }

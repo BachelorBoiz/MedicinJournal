@@ -63,34 +63,5 @@ namespace MedicinJournal.API.Controllers
             return Ok($"Jornal entry {id} deleted successfully");
 
         }
-
-        /// <summary>
-        /// Testing if the symmetric key encryption works, Console is the docker log
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-
-        [HttpGet("symmetric-encryption/{text}")]
-        public ActionResult<string> TestSymmetricEncryption([FromRoute]string text)
-        {
-            byte[] symmetricKey = _symmetricKeyService.GenerateKey();
-            byte[] iv = _symmetricKeyService.GenerateIV();
-
-            //encrypt
-            var encryptedText = _symmetricKeyService.EncryptText(symmetricKey, iv, text);
-
-            //decrypt
-            var deryptedText = _symmetricKeyService.DecryptText(symmetricKey, encryptedText);
-
-            //Test
-            Console.WriteLine("Symmetric Key Test---------------------------------");
-            Console.WriteLine($"Symmetric key = {symmetricKey}");
-            Console.WriteLine($"IV = {iv}");
-            Console.WriteLine($"Text before encryption = {text}");
-            Console.WriteLine($"Encrypted text = {encryptedText}");
-            Console.WriteLine($"Decrypted Text = {deryptedText}");
-            Console.WriteLine("Symmetric Key Test---------------------------------");
-            return Ok(deryptedText);
-        }
     }
 }
