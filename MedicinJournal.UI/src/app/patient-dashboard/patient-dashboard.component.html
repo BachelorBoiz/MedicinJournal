@@ -3,7 +3,7 @@
     <p>List of Journals:</p>
     <ul>
       <li *ngFor="let journal of journals">
-        <a [routerLink]="['/patient', journal]">{{ journal }}</a>
+        <a [routerLink]="['/patient', journal]">{{ journal.title }}</a>
       </li>
     </ul>
   </div>

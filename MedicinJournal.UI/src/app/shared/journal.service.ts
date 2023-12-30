@@ -11,6 +11,6 @@ export class JournalService {
   constructor(private _http: HttpClient) { }
 
   getJournals(): Observable<Journal[]> {
-    return this._http.get<Journal[]>('http://localhost:9000/api/Journals/userJournals')
+    return this._http.get<Journal[]>('http://localhost:9000/api/Journals/patientJournals')
   }
 }

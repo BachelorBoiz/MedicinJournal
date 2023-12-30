@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using AutoMapper;
+using MedicinJournal.API.Dtos;
 
 namespace MedicinJournal.API.Controllers
 {
@@ -12,15 +14,17 @@ namespace MedicinJournal.API.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(IEmployeeService employeeService)
+        public EmployeesController(IEmployeeService employeeService, IMapper mapper)
         {
             _employeeService = employeeService;
+            _mapper = mapper;
         }
 
         [Authorize(Roles = "Employee")]
         [HttpGet("LoggedInEmployeeInfo")]
-        public async Task<ActionResult<Employee>> GetLoggedInEmployeeInfo()
+        public async Task<ActionResult<EmployeeDto>> GetLoggedInEmployeeInfo()
         {
             try
             {
@@ -28,7 +32,9 @@ namespace MedicinJournal.API.Controllers
 
                 var employee = await _employeeService.GetById(employeeId);
 
-                return Ok(employee);
+                var employeeDto = _mapper.Map<EmployeeDto>(employee);
+
+                return Ok(employeeDto);
             }
             catch (Exception e)
             {
