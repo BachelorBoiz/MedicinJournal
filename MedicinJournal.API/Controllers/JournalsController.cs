@@ -12,8 +12,10 @@ using System.Data.SqlTypes;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using System.Reflection.Metadata;
+ using AutoMapper;
+ using MedicinJournal.API.Dtos;
 
-namespace MedicinJournal.API.Controllers
+ namespace MedicinJournal.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,14 +23,16 @@ namespace MedicinJournal.API.Controllers
     {
         private readonly ISymmetricCryptographyService _symmetricKeyService;
         private readonly IJournalService _journalService;
+        private readonly IMapper _mapper;
 
-        public JournalsController(IJournalService journalService, ISymmetricCryptographyService symmetricKeyService)
+        public JournalsController(IJournalService journalService, ISymmetricCryptographyService symmetricKeyService, IMapper mapper)
         {
             _journalService = journalService;
             _symmetricKeyService = symmetricKeyService;
+            _mapper = mapper;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("journal/{id}")]
         public async Task<ActionResult> GetJournalById([FromRoute] int id)
         {
@@ -37,17 +41,19 @@ namespace MedicinJournal.API.Controllers
             return Ok(journal);
         }
 
-        [Authorize(Roles = "Doctor, Patient")]
-        [HttpGet("userJournals")]
-        public async Task<ActionResult<IEnumerable<Journal>>> GetJournalsForUser()
+        [Authorize(Roles = "Patient")]
+        [HttpGet("patientJournals")]
+        public async Task<ActionResult<IEnumerable<JournalDto>>> GetJournalsForPatient()
         {
             try
             {
-                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var patientId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var journals = await _journalService.GetJournalsForUser(userId);
+                var journals = await _journalService.GetJournalsForUser(patientId);
 
-                return Ok(journals);
+                var journalsDto = _mapper.Map<IEnumerable<JournalDto>>(journals);
+
+                return Ok(journalsDto);
             }
             catch (Exception e)
             {
@@ -55,13 +61,12 @@ namespace MedicinJournal.API.Controllers
             }
         }
 
-        [Authorize(Roles = "Doctor")]
+        [Authorize(Roles = "Employee")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteJournalById([FromRoute] int id)
         {
             await _journalService.DeleteJournal(id);
-            return Ok($"Jornal entry {id} deleted successfully");
-
+            return Ok($"Journal entry {id} deleted successfully");
         }
     }
 }

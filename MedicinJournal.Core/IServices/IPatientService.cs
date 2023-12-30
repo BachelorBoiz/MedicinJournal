@@ -7,9 +7,9 @@ using MedicinJournal.Core.Models;
 
 namespace MedicinJournal.Core.IServices
 {
-    public interface IUserService
+    public interface IPatientService
     {
-        Task<User> GetUserById(int id);
-        Task<User> CreateUser(User user);
+        Task<Patient> GetPatientById(int id);
+        Task<Patient> CreatePatient(Patient patient);
     }
 }

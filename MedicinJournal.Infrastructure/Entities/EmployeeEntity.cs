@@ -12,6 +12,6 @@ namespace MedicinJournal.Infrastructure.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public EmployeeRole Role { get; set; }
-        public ICollection<UserEntity> Patients { get; set; }
+        public ICollection<PatientEntity> Patients { get; set; }
     }
 }

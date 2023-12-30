@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using MedicinJournal.Security.Models;
 
 namespace MedicinJournal.API.Jwt
 {
@@ -23,11 +24,22 @@ namespace MedicinJournal.API.Jwt
         {
             var user = await _userLoginService.GetUserLogin(userName);
 
+            var userId = 0;
+
             if (!_passwordHasher.Verify(user.HashedPassword, password))
                 return new JwtToken
                 {
-                    Message = "User or Password not correct"
+                    Message = "Patient or Password not correct"
                 };
+
+            if (user.Role == UserRole.Employee)
+            {
+                userId = (int)user.EmployeeId;
+            }
+            else if (user.Role == UserRole.Patient)
+            {
+                userId = (int)user.PatientId;
+            }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Secret"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -35,7 +47,7 @@ namespace MedicinJournal.API.Jwt
                 Configuration["Jwt:Audience"],
                 new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(ClaimTypes.Role, user.Role.ToString())
                 },

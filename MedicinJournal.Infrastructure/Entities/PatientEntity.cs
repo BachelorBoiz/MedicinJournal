@@ -1,6 +1,6 @@
 ﻿namespace MedicinJournal.Infrastructure.Entities
 {
-    public class UserEntity
+    public class PatientEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

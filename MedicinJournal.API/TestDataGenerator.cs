@@ -35,11 +35,11 @@ namespace MedicinJournal.API
             {
                 EmployeeId = 1,
                 UserName = "Doctor",
-                Role = UserRole.Doctor,
+                Role = UserRole.Employee,
                 HashedPassword = _passwordHasher.Hash("123456")
             });
 
-            _medicinJournalDbContext.Users.Add(new UserEntity
+            _medicinJournalDbContext.Patients.Add(new PatientEntity
             {
                 Name = "Patient Zero",
                 DoctorId = 1,
@@ -49,7 +49,7 @@ namespace MedicinJournal.API
 
             _userLoginDbContext.UserLogins.Add(new UserLogin
             {
-                UserId = 1,
+                PatientId = 1,
                 UserName = "Patient",
                 Role = UserRole.Patient,
                 HashedPassword = _passwordHasher.Hash("123456")

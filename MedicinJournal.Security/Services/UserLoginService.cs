@@ -24,7 +24,7 @@ namespace MedicinJournal.Security.Services
 
             var userLogin = new UserLogin
             {
-                UserId = userId,
+                PatientId = userId,
                 UserName = userName,
                 HashedPassword = hashedPassword
             };

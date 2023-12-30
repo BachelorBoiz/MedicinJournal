@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MedicinJournal.Domain.IRepositories
 {
-    public interface IUserRepository
+    public interface IPatientRepository
     {
-        Task<User> GetUserById(int id);
-        Task<User> CreateUser(User user);
+        Task<Patient> GetPatientById(int id);
+        Task<Patient> CreatePatient(Patient patient);
     }
 }

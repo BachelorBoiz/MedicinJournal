@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicinJournal.Core.Models;
 
-namespace MedicinJournal.Core.Models
+namespace MedicinJournal.API.Dtos
 {
-    public class User
+    public class PatientDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,6 +10,6 @@ namespace MedicinJournal.Core.Models
         public string? Gender { get; set; }
         public double? Height { get; set; }
         public double? Weight { get; set; }
-        public ICollection<Journal>? Journals { get; set; }
-    }    
+        public ICollection<JournalDto>? Journals { get; set; }
+    }
 }

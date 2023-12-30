@@ -13,7 +13,7 @@ namespace MedicinJournal.Infrastructure
     {
         public MappingProfile()
         {
-            CreateMap<User, UserEntity>().ReverseMap();
+            CreateMap<Patient, PatientEntity>().ReverseMap();
             CreateMap<Journal, JournalEntity>().ReverseMap();
             CreateMap<Employee, EmployeeEntity>().ReverseMap();
         }

@@ -3,6 +3,7 @@ using MedicinJournal.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MedicinJournal.API.Controllers
 {
@@ -17,13 +18,15 @@ namespace MedicinJournal.API.Controllers
             _employeeService = employeeService;
         }
 
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployeeById([FromRoute] int id)
+        [Authorize(Roles = "Employee")]
+        [HttpGet("LoggedInEmployeeInfo")]
+        public async Task<ActionResult<Employee>> GetLoggedInEmployeeInfo()
         {
             try
             {
-                var employee = await _employeeService.GetById(id);
+                var employeeId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                var employee = await _employeeService.GetById(employeeId);
 
                 return Ok(employee);
             }

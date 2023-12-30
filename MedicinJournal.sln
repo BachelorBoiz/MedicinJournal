@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Security", "MedicinJournal.Security\MedicinJournal.Security.csproj", "{7C5A358D-8694-4D4D-A9B1-9FA971577801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicinJournal.Test", "MedicinJournal.Test\MedicinJournal.Test.csproj", "{13143B3A-17F6-4B5F-A6E4-7AA9A441E595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicinJournal.Test", "MedicinJournal.Test\MedicinJournal.Test.csproj", "{13143B3A-17F6-4B5F-A6E4-7AA9A441E595}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81567167-8FA7-40E8-9EE3-14706D846F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{13143B3A-17F6-4B5F-A6E4-7AA9A441E595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13143B3A-17F6-4B5F-A6E4-7AA9A441E595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13143B3A-17F6-4B5F-A6E4-7AA9A441E595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81567167-8FA7-40E8-9EE3-14706D846F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81567167-8FA7-40E8-9EE3-14706D846F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81567167-8FA7-40E8-9EE3-14706D846F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81567167-8FA7-40E8-9EE3-14706D846F37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

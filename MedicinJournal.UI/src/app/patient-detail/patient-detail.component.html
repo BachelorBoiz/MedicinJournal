@@ -1,5 +1,21 @@
-
 <div class="patient-detail-container">
-    <h2>Patient Details</h2>
-    <p>{{ patientName }}'s details go here...</p>
+  <h2>{{ patient?.name }}'s Details</h2>
+  <div class="patient-info">
+    <p><strong>ID:</strong> {{ patient?.id }}</p>
+    <p><strong>Name:</strong> {{ patient?.name }}</p>
+    <p><strong>Birth Date:</strong> {{ patient?.birthDate| date:'mediumDate' }}</p>
+    <p><strong>Gender:</strong> {{ patient?.gender }}</p>
+    <p><strong>Height:</strong> {{ patient?.height }}</p>
+    <p><strong>Weight:</strong> {{ patient?.weight || 'N/A' }}</p>
   </div>
+  <h3>Journals</h3>
+  <ul class="journal-list">
+    <li *ngFor="let journal of patient?.journals">
+      <div class="journal-item">
+        <p><strong>Title:</strong> {{ journal.title }}</p>
+        <p><strong>Description:</strong> {{ journal.description }}</p>
+        <p><strong>Created:</strong> {{ journal.created | date:'medium' }}</p>
+      </div>
+    </li>
+  </ul>
+</div>

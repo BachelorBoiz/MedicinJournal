@@ -3,7 +3,7 @@
   <p>List of Patients:</p>
   <ul>
     <li *ngFor="let patient of patients">
-      <a [routerLink]="['/patient', patient]">{{ patient }}</a>
+      <a [routerLink]="['/patient', patient.id]">{{ patient.name }}</a>
     </li>
   </ul>
 </div>

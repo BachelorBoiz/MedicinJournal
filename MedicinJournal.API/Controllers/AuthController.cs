@@ -18,24 +18,24 @@ namespace MedicinJournal.API.Controllers
     {
         private readonly IJwtService _jwtService;
         private readonly IUserLoginService _userLoginService;
-        private readonly IUserService _userService;
+        private readonly IPatientService _patientService;
 
-        public AuthController(IJwtService jwtService, IUserLoginService userLoginService, IUserService userService)
+        public AuthController(IJwtService jwtService, IUserLoginService userLoginService, IPatientService patientService)
         {
             _jwtService = jwtService;
             _userLoginService = userLoginService;
-            _userService = userService;
+            _patientService = patientService;
         }
 
-        [Authorize(Roles = "Doctor")]
-        [HttpPost("CreateUser")]
+        [Authorize(Roles = "Employee")]
+        [HttpPost("CreatePatient")]
         public async Task<ActionResult<JwtToken>> CreateUser([FromBody] CreateUserDto dto)
         {
             var user = await _userLoginService.GetUserLogin(dto.UserName);
 
-            if (user is not null) return BadRequest("User with given username already exists");
+            if (user is not null) return BadRequest("Patient with given username already exists");
 
-            var newUser = await _userService.CreateUser(new User
+            var newUser = await _patientService.CreatePatient(new Patient
             {
                 BirthDate = dto.BirthDate,
                 Gender = dto.Gender,

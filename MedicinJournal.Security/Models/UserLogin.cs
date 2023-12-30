@@ -10,7 +10,7 @@ namespace MedicinJournal.Security.Models
     public class UserLogin
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public int? PatientId { get; set; }
         public int? EmployeeId { get; set; }
         public UserRole Role { get; set; }
         public string UserName { get; set; }
