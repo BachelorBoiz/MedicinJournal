@@ -34,11 +34,27 @@ using System.Reflection.Metadata;
 
         [Authorize]
         [HttpGet("journal/{id}")]
-        public async Task<ActionResult> GetJournalById([FromRoute] int id)
+        public async Task<ActionResult<JournalDto>> GetJournalById([FromRoute] int id)
         {
-            var journal = await _journalService.GetJournalById(id);
+            try
+            {
+                var journal = await _journalService.GetJournalById(id);
 
-            return Ok(journal);
+                var patientId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if(journal.Patient.Id != patientId)
+                {
+                    return Unauthorized();
+                }
+
+                var journalDto = _mapper.Map<JournalDto>(journal);
+
+                return Ok(journalDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }            
         }
 
         [Authorize(Roles = "Patient")]

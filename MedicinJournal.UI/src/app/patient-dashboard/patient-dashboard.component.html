@@ -1,6 +1,6 @@
 <div class="dashboard-container">
-    <h2>Home Dashboard</h2>
-    <p>List of Journals:</p>
+    <h2>Welcome</h2>
+    <p>These are your Journals:</p>
     <ul>
       <li *ngFor="let journal of journals">
         <a [routerLink]="['/patient', journal]">{{ journal.title }}</a>

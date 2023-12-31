@@ -29,7 +29,7 @@ namespace MedicinJournal.API.Controllers
 
         [Authorize(Roles = "Employee")]
         [HttpPost("CreatePatient")]
-        public async Task<ActionResult<JwtToken>> CreateUser([FromBody] CreateUserDto dto)
+        public async Task<ActionResult<JwtToken>> CreatePatient([FromBody] CreateUserDto dto)
         {
             var user = await _userLoginService.GetUserLogin(dto.UserName);
 
@@ -42,7 +42,7 @@ namespace MedicinJournal.API.Controllers
                 Height = dto.Height,
                 Name = dto.Name,
                 Weight = dto.Weight
-            }); ;
+            });
 
             var newUserLogin = await _userLoginService.CreateUserLogin(newUser.Id, dto.UserName, dto.PlainTextPassword);
 
