@@ -30,7 +30,7 @@ namespace MedicinJournal.Test.Security
         public void Test_SymmetricCryptography_generateKey_unique()
         {
             ISymmetricCryptographyService _service = new SymmetricCryptographyService();
-            int numberOfKeyToGenerate = 20;
+            int numberOfKeyToGenerate = 120;
 
             List<byte[]> generatedKeys = new List<byte[]>();
             for (int i = 0; i < numberOfKeyToGenerate; i++)
