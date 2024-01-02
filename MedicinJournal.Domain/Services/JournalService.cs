@@ -28,9 +28,9 @@ namespace MedicinJournal.Domain.Services
             return await _journalRepository.GetJournalsForUser(userId);
         }
 
-        public async Task<Journal> CreateJournal(Journal journal)
+        public async Task<Journal> CreateJournal(Journal journal, int patientId)
         {
-            return await _journalRepository.CreateJournal(journal);
+            return await _journalRepository.CreateJournal(journal, patientId);
         }
 
         public async Task<Journal> UpdateJournal(Journal journal)

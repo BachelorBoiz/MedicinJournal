@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MedicinJournal.API.Dtos;
 using MedicinJournal.Core.Models;
+using System.Text;
 
 namespace MedicinJournal.API
 {
@@ -10,6 +11,7 @@ namespace MedicinJournal.API
         {
             CreateMap<Patient, PatientDto>().ReverseMap();
             CreateMap<Journal, JournalDto>().ReverseMap();
+            CreateMap<Journal, CreateJournalDto>().ReverseMap();
             CreateMap<Employee, EmployeeDto>().ReverseMap();
         }
     }

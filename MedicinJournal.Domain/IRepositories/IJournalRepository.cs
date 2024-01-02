@@ -11,7 +11,7 @@ namespace MedicinJournal.Domain.IRepositories
     {
         Task<Journal> GetJournalById(int id);
         Task<IEnumerable<Journal>> GetJournalsForUser(int userId);
-        Task<Journal> CreateJournal(Journal journal);
+        Task<Journal> CreateJournal(Journal journal, int patientId);
         Task<Journal> UpdateJournal(Journal journal);
         Task DeleteJournal(int id);
     }

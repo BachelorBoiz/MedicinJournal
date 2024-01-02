@@ -29,12 +29,7 @@ public class MedicinJournalDbContext : DbContext
 
         modelBuilder.Entity<JournalEntity>()
             .HasOne(journal => journal.Patient)
-            .WithMany(user => user.Journals)
+            .WithMany(patient => patient.Journals)
             .HasForeignKey(journal => journal.PatientId);
-
-        modelBuilder.Entity<JournalEntity>()
-            .HasOne(journal => journal.Doctor)
-            .WithMany()
-            .HasForeignKey(journal => journal.DoctorId);
         }
 }

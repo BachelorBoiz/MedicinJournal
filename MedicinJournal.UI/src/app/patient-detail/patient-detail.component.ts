@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from '../shared/models/patient';
 import { PatientService } from '../shared/patient.service';
 
@@ -12,7 +12,7 @@ export class PatientDetailComponent implements OnInit {
   patientId!: number;
   patient: Patient | undefined
 
-  constructor(private route: ActivatedRoute, private _patientService: PatientService) {}
+  constructor(private route: ActivatedRoute, private _patientService: PatientService, private router: Router) {}
 
   ngOnInit(): void {
     const patientIdString = this.route.snapshot.paramMap.get('id');
@@ -24,5 +24,9 @@ export class PatientDetailComponent implements OnInit {
     this._patientService.getPatientById(this.patientId).subscribe(value => {
       this.patient = value
     })
+  }
+
+  navigateToCreateJournal(): void {
+    this.router.navigate(['/create-journal' + this.patientId])
   }
 }

@@ -1,0 +1,13 @@
+<div class="create-journal-container">
+    <h2>Create New Journal</h2>
+    <form>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" [(ngModel)]="title" required>
+  
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+  
+      <button type="button" (click)="createJournal()">Create Journal</button>
+    </form>
+  </div>
+  

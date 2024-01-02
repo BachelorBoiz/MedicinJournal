@@ -111,6 +111,8 @@ await using (var scope = app.Services.CreateAsyncScope())
     var ctx = scope.ServiceProvider.GetRequiredService<MedicinJournalDbContext>();
     var authCtx = scope.ServiceProvider.GetRequiredService<SecurityDbContext>();
     var passwordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+    var symmetricService = scope.ServiceProvider.GetRequiredService<ISymmetricCryptographyService>();
+    var asymmetricService = scope.ServiceProvider.GetRequiredService<IAsymmetricCryptographyService>();
 
     await ctx.Database.EnsureDeletedAsync();
     await authCtx.Database.EnsureDeletedAsync();
@@ -118,7 +120,7 @@ await using (var scope = app.Services.CreateAsyncScope())
     await ctx.Database.EnsureCreatedAsync();
     await authCtx.Database.EnsureCreatedAsync();
 
-    var testDataGenerator = new TestDataGenerator(ctx, authCtx, passwordHash);
+    var testDataGenerator = new TestDataGenerator(ctx, authCtx, passwordHash, symmetricService, asymmetricService);
 
     testDataGenerator.Generate();
 }

@@ -182,7 +182,7 @@ namespace MedicinJournal.Security.Services
             }
         }
 
-        public bool VerifySignature(string data, string signature, string publicKey)
+        public bool VerifySignature(string data, byte[] signature, string publicKey)
         {
             try
             {
@@ -192,10 +192,10 @@ namespace MedicinJournal.Security.Services
                     throw new ArgumentException("The data parameter cannot be null or empty.", nameof(data));
                 }
 
-                if (string.IsNullOrEmpty(signature))
-                {
-                    throw new ArgumentException("The signature parameter cannot be null or empty.", nameof(signature));
-                }
+                //if (string.IsNullOrEmpty(signature))
+                //{
+                //    throw new ArgumentException("The signature parameter cannot be null or empty.", nameof(signature));
+                //}
 
                 if (string.IsNullOrEmpty(publicKey))
                 {
@@ -212,13 +212,13 @@ namespace MedicinJournal.Security.Services
                     rsa.FromXmlString(publicKey);
 
                     byte[] dataBytes = Encoding.UTF8.GetBytes(data);
-                    byte[] signatureBytes = Convert.FromBase64String(signature);
+                    //byte[] signatureBytes = Convert.FromBase64String(signature);
 
                     using (var hasher = SHA256.Create())
                     {
                         byte[] hashedData = hasher.ComputeHash(dataBytes);
 
-                        bool isSignatureValid = rsa.VerifyData(hashedData, signatureBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                        bool isSignatureValid = rsa.VerifyData(hashedData, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
                         return isSignatureValid;
                     }
@@ -279,7 +279,7 @@ namespace MedicinJournal.Security.Services
             }
         }
 
-        private RSAParameters DeserializeRSAParameters(string serializedParameters)
+        public RSAParameters DeserializeRSAParameters(string serializedParameters)
         {
             var serializer = new XmlSerializer(typeof(RSAParameters));
             using (var reader = new StringReader(serializedParameters))

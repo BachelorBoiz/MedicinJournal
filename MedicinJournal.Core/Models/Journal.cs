@@ -10,9 +10,8 @@ namespace MedicinJournal.Core.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime Created { get; set; }
-        public Employee Doctor { get; set; }
+        public byte[] Description { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
         public Patient Patient { get; set; }
     }
 }

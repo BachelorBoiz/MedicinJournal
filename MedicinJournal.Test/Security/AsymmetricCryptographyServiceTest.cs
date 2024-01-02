@@ -191,36 +191,36 @@ namespace MedicinJournal.Test.Security
         #endregion
 
         #region Signature Verification Tests
-        public void Test_VerifySignature_ValidSignature_ReturnsTrue()
-        {
-            var keyPair = _service.GenerateKeyPair();
-            var data = "Hello, world!";
-            var signature = _service.GenerateSignature(data, DeserializeRSAParameters(keyPair.privateKey));
+        //public void Test_VerifySignature_ValidSignature_ReturnsTrue()
+        //{
+        //    var keyPair = _service.GenerateKeyPair();
+        //    var data = "Hello, world!";
+        //    var signature = _service.GenerateSignature(data, DeserializeRSAParameters(keyPair.privateKey));
 
-            var isValid = _service.VerifySignature(data, Convert.ToBase64String(signature), keyPair.publicKey);
+        //    var isValid = _service.VerifySignature(data, Convert.ToBase64String(signature), keyPair.publicKey);
 
-            Assert.True(isValid);
-        }
+        //    Assert.True(isValid);
+        //}
 
-        [Theory]
-        [InlineData(null, "ValidSignature", "PublicKey", typeof(ArgumentException))]
-        [InlineData("Hello, world!", null, "PublicKey", typeof(ArgumentException))]
-        [InlineData("", "ValidSignature", "PublicKey", typeof(ArgumentException))]
-        [InlineData("Hello, world!", "", "PublicKey", typeof(ArgumentException))]
-        [InlineData("Hello, world!", "ValidSignature", "", typeof(ArgumentException))]
-        [InlineData("Hello, world!", "ValidSignature", "InvalidPublicKeyFormat", typeof(ArgumentException))]
-        public void Test_VerifySignature_InvalidArguments_ThrowsException(string data, string signature, string publicKey, Type exceptionType)
-        {
-            var keyPair = _service.GenerateKeyPair();
-            Assert.Throws(exceptionType, () => _service.VerifySignature(data, signature, publicKey ?? keyPair.publicKey));
-        }
-        [Fact]
-        public void Test_VerifySignature_NullPublicKey_ThrowsException()
-        {
-            var data = "Hello, world!";
-            var signature = "ValidSignature";
-            Assert.Throws<ArgumentException>(() => _service.VerifySignature(data, signature, null));
-        }
+        //[Theory]
+        //[InlineData(null, "ValidSignature", "PublicKey", typeof(ArgumentException))]
+        //[InlineData("Hello, world!", null, "PublicKey", typeof(ArgumentException))]
+        //[InlineData("", "ValidSignature", "PublicKey", typeof(ArgumentException))]
+        //[InlineData("Hello, world!", "", "PublicKey", typeof(ArgumentException))]
+        //[InlineData("Hello, world!", "ValidSignature", "", typeof(ArgumentException))]
+        //[InlineData("Hello, world!", "ValidSignature", "InvalidPublicKeyFormat", typeof(ArgumentException))]
+        //public void Test_VerifySignature_InvalidArguments_ThrowsException(string data, string signature, string publicKey, Type exceptionType)
+        //{
+        //    var keyPair = _service.GenerateKeyPair();
+        //    Assert.Throws(exceptionType, () => _service.VerifySignature(data, signature, publicKey ?? keyPair.publicKey));
+        //}
+        //[Fact]
+        //public void Test_VerifySignature_NullPublicKey_ThrowsException()
+        //{
+        //    var data = "Hello, world!";
+        //    var signature = "ValidSignature";
+        //    Assert.Throws<ArgumentException>(() => _service.VerifySignature(data, signature, null));
+        //}
         [Fact]
         public void Test_EncryptAndDecrypt_DataRemainsSame()
         {

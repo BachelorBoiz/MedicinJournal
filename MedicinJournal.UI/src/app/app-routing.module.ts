@@ -5,6 +5,7 @@ import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { CreateJournalComponent } from './create-journal/create-journal.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'create-user', component: CreateUserComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'patient-dashboard', component: PatientDashboardComponent},
-  {path: 'patient/:id', component: PatientDetailComponent}
+  {path: 'patient/:id', component: PatientDetailComponent},
+  {path: 'create-journal/:id', component: CreateJournalComponent}
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MedicinJournal.Security.Models
 {
-    public class UserLogin
+    public class User
     {
         public int Id { get; set; }
         public int? PatientId { get; set; }
@@ -15,5 +15,7 @@ namespace MedicinJournal.Security.Models
         public UserRole Role { get; set; }
         public string UserName { get; set; }
         public string HashedPassword { get; set; }
+        public string PublicKey { get; set; }
+        public string PrivateKey { get; set; }
     }
 }

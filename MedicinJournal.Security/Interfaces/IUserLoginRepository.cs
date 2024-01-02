@@ -9,8 +9,14 @@ namespace MedicinJournal.Security.Interfaces
 {
     public interface IUserLoginRepository
     {
-        Task<UserLogin?> GetByUserName(string userName);
-        Task<UserLogin> CreateUserLogin(UserLogin userLogin);
+        Task<User?> GetByUserName(string userName);
+        Task<User> CreateUserLogin(User user);
         Task<UserRole> GetUserRole(string userName);
+        Task<User> GetUserByPatientId(int patientId);
+        Task<User> GetUserByDoctorId(int doctorId);
+        Task<SymmetricKey> GetSymmetricKeyByJournalId(int journalId);
+        Task<SymmetricKey> CreateSymmetricKey(SymmetricKey key);
+        Task<Signature> GetSignatureByJournalId(int journalId);
+        Task<Signature> CreateSignature(Signature signature);
     }
 }

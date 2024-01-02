@@ -13,12 +13,21 @@ namespace MedicinJournal.API
         private readonly MedicinJournalDbContext _medicinJournalDbContext;
         private readonly SecurityDbContext _userLoginDbContext;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly ISymmetricCryptographyService _symmetricCryptographyService;
+        private readonly IAsymmetricCryptographyService _asymmetricCryptographyService;
 
-        public TestDataGenerator(MedicinJournalDbContext medicinJournalDbContext, SecurityDbContext userLoginDbContext, IPasswordHasher passwordHasher)
+        public TestDataGenerator(
+            MedicinJournalDbContext medicinJournalDbContext,
+            SecurityDbContext userLoginDbContext,
+            IPasswordHasher passwordHasher,
+            ISymmetricCryptographyService symmetricCryptographyService,
+            IAsymmetricCryptographyService asymmetricCryptographyService)
         {
             _medicinJournalDbContext = medicinJournalDbContext;
             _userLoginDbContext = userLoginDbContext;
             _passwordHasher = passwordHasher;
+            _symmetricCryptographyService = symmetricCryptographyService;
+            _asymmetricCryptographyService = asymmetricCryptographyService;
         }
 
         public void Generate()
@@ -31,12 +40,16 @@ namespace MedicinJournal.API
 
              _medicinJournalDbContext.SaveChanges();
 
-            _userLoginDbContext.UserLogins.Add(new UserLogin
+             var doctorKeys = _asymmetricCryptographyService.GenerateKeyPair();
+
+            _userLoginDbContext.UserLogins.Add(new User
             {
                 EmployeeId = 1,
                 UserName = "Doctor",
                 Role = UserRole.Employee,
-                HashedPassword = _passwordHasher.Hash("123456")
+                HashedPassword = _passwordHasher.Hash("123456"),    
+                PublicKey = doctorKeys.publicKey,
+                PrivateKey = doctorKeys.privateKey
             });
 
             _medicinJournalDbContext.Patients.Add(new PatientEntity
@@ -47,23 +60,47 @@ namespace MedicinJournal.API
                 BirthDate = DateTime.Now
             });
 
-            _userLoginDbContext.UserLogins.Add(new UserLogin
+            var patientKeys = _asymmetricCryptographyService.GenerateKeyPair();
+
+            _userLoginDbContext.UserLogins.Add(new User
             {
                 PatientId = 1,
                 UserName = "Patient",
                 Role = UserRole.Patient,
-                HashedPassword = _passwordHasher.Hash("123456")
+                HashedPassword = _passwordHasher.Hash("123456"),
+                PublicKey = patientKeys.publicKey,
+                PrivateKey = patientKeys.privateKey
             });
 
             _medicinJournalDbContext.SaveChanges();
 
+            var symmetricKey = _symmetricCryptographyService.GenerateKey();
+            var iv = _symmetricCryptographyService.GenerateIV();
+
             _medicinJournalDbContext.Journals.Add(new JournalEntity
             {
                 Created = DateTime.Now,
-                Description = "Test",
+                Description = _symmetricCryptographyService.EncryptText(symmetricKey, iv, "This is the description text"),
                 Title = "Test",
-                DoctorId  = 1,
                 PatientId = 1
+            });
+
+            _userLoginDbContext.SymmetricKeys.Add(new SymmetricKey
+            {
+                DoctorId = 1,
+                PatientId = 1,
+                JournalId = 1,
+                IV = iv,
+                Key = symmetricKey
+            });
+
+            _userLoginDbContext.Signatures.Add(new Signature
+            {
+                JournalId = 1,
+                TimeStamp = DateTime.Now,
+                EncryptedHash = _asymmetricCryptographyService.GenerateSignature("This is the description text",
+                    _asymmetricCryptographyService.DeserializeRSAParameters(doctorKeys.privateKey)),
+                
             });
 
             _medicinJournalDbContext.SaveChanges();

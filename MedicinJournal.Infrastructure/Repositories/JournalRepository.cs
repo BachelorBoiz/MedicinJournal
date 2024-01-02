@@ -41,9 +41,11 @@ namespace MedicinJournal.Infrastructure.Repositories
             return journals;
         }
 
-        public async Task<Journal> CreateJournal(Journal journal)
+        public async Task<Journal> CreateJournal(Journal journal, int patientId)
         {
             var entity = _mapper.Map<JournalEntity>(journal);
+
+            entity.PatientId = patientId;
 
             await _dbContext.Journals.AddAsync(entity);
             await _dbContext.SaveChangesAsync();

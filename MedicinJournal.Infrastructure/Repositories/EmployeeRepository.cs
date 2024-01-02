@@ -20,6 +20,7 @@ namespace MedicinJournal.Infrastructure.Repositories
         public async Task<Employee> GetById(int id)
         {
             var employeeEntity = await _dbContext.Employees
+                .AsNoTracking()
                 .Include(e => e.Patients)
                 .FirstOrDefaultAsync(e => e.Id == id);
 

@@ -17,6 +17,8 @@ namespace MedicinJournal.Security.Interfaces
 
         public byte[] GenerateSignature(string data, RSAParameters privateKeyParameters);
 
-        public bool VerifySignature(string data, string signature, string publicKey);
+        public bool VerifySignature(string data, byte[] signature, string publicKey);
+
+        public RSAParameters DeserializeRSAParameters(string serializedParameters);
     }
 }
