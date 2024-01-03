@@ -25,7 +25,6 @@ export class LoginComponent {
     this._auth.login(loginData)
       .subscribe(token => {
         if(token && token.jwt){
-          console.log('Token: ', token);
           this._auth.getUserRole().subscribe(role => {
             if(role.name === "Employee") {
               this.router.navigate(['/dashboard'])

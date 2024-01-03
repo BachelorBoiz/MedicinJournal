@@ -32,6 +32,9 @@ namespace MedicinJournal.API.Middleware
                 if (request.Path.StartsWithSegments("/api/Auth/login"))
                     return;
 
+                if (request.Path.StartsWithSegments("/api/Journals/CreateJournal/Patient/"))
+                    return;
+
                 request.RouteValues.TryGetValue(ControllerKey, out var controllerValue);
                 var controllerName = (string)(controllerValue ?? string.Empty);
 
