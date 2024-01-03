@@ -58,7 +58,12 @@ using System.Numerics;
 
                 var patientId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var patient =await _patientService.GetPatientById(patientId);
+                var patient = await _patientService.GetPatientById(patientId);
+
+                if (journal.Patient.Id != patientId)
+                {
+                    return Unauthorized();
+                }
 
                 var doctor = await _userLoginService.GetUserByDoctorId(patient.Doctor.Id);
 
